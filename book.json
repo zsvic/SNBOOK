@@ -3,7 +3,7 @@
     "language": "zh",
     "pdf": {
         "pageNumbers": true,
-        "fontFamily": "黑体",
+        "fontFamily": "微软雅黑",
         "paperSize": "a4",
         "margin": {
 
