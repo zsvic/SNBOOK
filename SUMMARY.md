@@ -1,4 +1,4 @@
-* [第一章：Java软件开发](./snbook/Java软件开发/Java软件开发目录.md)
+* [第一章：Java软件开发](./snbook/Java软件开发/Java软件开发.md)
     * [第一节：Java简要](./snbook/Java软件开发/Java简要.md)
     * [第二节：Jvm简要](./snbook/Java软件开发/Jvm简要.md)
     * [第三节：Java分布式](./snbook/Java软件开发/Java分布式.md)
