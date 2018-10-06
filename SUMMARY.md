@@ -1,7 +1,7 @@
 * 第一章：Java软件开发
-    * [第一节：Java简要](.snbook/Java软件开发/Java简要.md)
-    * [第二节：Jvm简要](.snbook/Java软件开发/Jvm简要.md)
-    * [第三节：Java分布式](.snbook/Java软件开发/Java分布式.md)
-    * [第四节：Java设计模式](.snbook/Java软件开发/设计模式.md)
+    * [第一节：Java简要](./snbook/Java软件开发/Java简要.md)
+    * [第二节：Jvm简要](./snbook/Java软件开发/Jvm简要.md)
+    * [第三节：Java分布式](./snbook/Java软件开发/Java分布式.md)
+    * [第四节：Java设计模式](./snbook/Java软件开发/设计模式.md)
 * 第二章：计算机基础
-    * [第一节：操作系统](.snbook/计算机基础/操作系统.md)
+    * [第一节：操作系统](./snbook/计算机基础/操作系统.md)
