@@ -168,7 +168,12 @@ Java中访问权限有四种，Public，Protected，Default，Private。
     - Default：默认的包访问权限
     - Private：仅该类内访问
 
+### 内部类
+
 ## 2.2 继承：继承与组合
+
+
+
 
 ## 2.3 抽象：抽象类与接口
 
