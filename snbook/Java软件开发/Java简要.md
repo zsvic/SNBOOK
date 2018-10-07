@@ -158,6 +158,15 @@ MyClass mc = c.newInstance("String",1); //有参
 
 
 ### 访问权限
+Java中访问权限有四种，Public，Protected，Default，Private。
+- 类访问权限：类的访问权限只有两种：Public，Default。
+    - Public表示任何位置可以使用
+    - Default为缺省值，表示包访问权限
+- 类中成员访问权限：
+    - Public：表示类外的所有地方都可以访问
+    - Protected：表示包内以及包外子类可以访问
+    - Default：默认的包访问权限
+    - Private：仅该类内访问
 
 ## 2.2 继承：继承与组合
 
