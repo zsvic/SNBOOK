@@ -127,6 +127,43 @@ a += 1; //a+1后的值，在赋值时会强制转换成short，等价于 a=(shor
 
 # 2 面向对象
 
+## 2.1 封装：类与对象
+类表示具有同一特征事物的集合，它通常由属性（字段），操作（方法）组成。对象是类中具体的某一个实例。
+
+### 类的定义
+类使用Class关键字定义
+```java
+public class MyClass{
+    public Type Feild;
+    public MyClass(){}
+    public Type Func(){}
+}
+```
+### 对象初始化
+对象的创建与初始化主要是通过构造器来完成，使用构造器的途径通常有两个：
+- 使用new关键字与构造器创建并初始化对象
+- 使用反射机制获取到类的构造器实例，通过构造器实例创建并初始化对象。
+
+```java
+//new
+MyClass mc = new MyClass();
+
+//反射
+Class  clazz=Class.forName("MyClass");   
+MyClass mc = clazz.newInstance();//无参
+
+Constructor  c=clazz.getConstructor(String.class,int.class);
+MyClass mc = c.newInstance("String",1); //有参 
+```
+
+
+### 访问权限
+
+## 2.2 继承：继承与组合
+
+## 2.3 抽象：抽象类与接口
+
+## 2.4 多态：重写与重载
 
 
 # 3 高级特性
