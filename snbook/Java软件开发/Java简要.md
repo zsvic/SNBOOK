@@ -189,11 +189,36 @@ public @interface MyAnnotation{
     - @Inherited：允许子类继承父类注解
 
 > 注解会编译成class文件
-> 注解的元素一定要有个“非零”的确定值
+> 注解的元素一定要有个“非空”的确定值
 
 
 
 #### 注解处理器
+
+如果没有注解处理器，那么注解的将不会起到任何作用，因此在自定义注解中，编写注解处理器是必要的。
+注解处理器通常使用反射机制、外部工具apt来实现。
+
+- **简单反射机制**：当注解的Retention级别为RUNTIME时，可以直接使用反射来获取对象的方法集合(元素为Method类型的对象)，通过遍历Method对象，获取到每个方法对象的注解，然后针对该注解进行处理。（同样方式可以处理类，字段上的注解）
+
+```java
+
+public class classType{
+    @AnnotationType(id = 1)
+    public void function(){}
+}
+
+public class AnnotationProcess{
+    classType c = new classType();
+    for(Method m : c.getDeclaredMethods()){
+        AnnotationType at = m.getAnnotation(AnnotationType.class);
+        if(at != null){
+            at.id();
+        }
+    }
+}
+
+```
+- **注解处理工具apt**：apt是直接操作源文件，将源文件的注解进行处理，若在此过程生成新的源文件，则进行新一轮的处理，所有源文件的注解处理完毕后，再一起进行编译。
 
 
 ## 3.4 并发
