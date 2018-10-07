@@ -150,7 +150,7 @@ A<String> a = new A<String>("a");
 
 
 ## 3.3 注解
-注解是在代码中添加额外信息的一种形式化方法，通过注解处理器对这些信息进行处理和利用。
+注解是一种特殊的接口，是在代码中添加额外信息的一种形式化方法，通过注解处理器对这些信息进行处理和利用。
 
 没有注解时，这些额外的信息通常是通过配置文件来配置的，配置文件虽然降低了代码的耦合性，但是也使得代码编写不统一。注解的好处就是以Java语句来表达这些额外信息，使得代码编写得到统一，减少额外配置，并且能够在编译期对这些信息进行类型检查。
 
@@ -219,6 +219,21 @@ public class AnnotationProcess{
 
 ```
 - **注解处理工具apt**：apt是直接操作源文件，将源文件的注解进行处理，若在此过程生成新的源文件，则进行新一轮的处理，所有源文件的注解处理完毕后，再一起进行编译。
+  
+使用apt，需要继承```javax.annotation.processing.AbstractProcessor```类，并重写其中的```process```方法
+```java
+
+public class MyAnnotationProcessor extends AbstractProcessor {
+
+	@Override
+	public boolean process(Set<? extends TypeElement> annotations,
+			RoundEnvironment roundEnv) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
+```
 
 
 ## 3.4 并发
