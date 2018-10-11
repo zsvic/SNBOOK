@@ -11,7 +11,7 @@ Java中变量存储的内容可以分为两类，一个为基本类型，一个�
 - 整数：byte 1字节，short 2字节，int 4字节，long 8字节
 - 浮点型：float 4字节，double 8字节
 - 字符型：char 2字节
-- boolen：根据Jvm实现确定
+- boolen：通常单个boolen变量会转换成int型，boolen数组会转换成byte型
 
 基本类型初始化
 ```java
