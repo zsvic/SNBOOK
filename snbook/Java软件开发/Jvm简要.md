@@ -37,14 +37,45 @@ Jvm运行时，将它拥有的内存分成若干部分，每一部分都有特�
 - 动态链接：方法在执行过程中，会遇到许多符号引用，这时就需要借助该方法所属类的常量池进行动态链接，将符号引用解析成具体的内存地址。
 
 
-## 1.2 编译-从源代码到jvm指令
+## 1.2 编译
 
+### 1.2.1 前期编译
+
+### 1.2.2 即时编译
 
 
 ## 1.3 类加载与执行
 
 ### 1.3.1 Class文件结构
 
+#### 简述
+一个class文件的结构如下：
+
+```java 
+
+ClassFile{
+    u4          magic;
+    u2          minor_version; u2          major_version;
+    u2          constant_pool_count;
+    cp_info     constant_pool[constant_pool_count-1];
+    u2          access_flags;
+    u2          this_class;
+    u2          super_class;
+    u2          interfaces_count;
+    u2          interfaces[interfaces_count];
+    u2          fields_count;
+    field_info  fields[fields_count];
+    u2          methods_count;
+    method_info methods[methods_count];
+    u2          attributes_count;
+    attribute_info attributes[attributes_count];
+}
+```
+- 常量池(constant pool)：常量池主要存储各种编译时确定的信息，比如字符串常量，类、接口名称，字段名称，以及其他常量。每个常量池中的元素都是cp_info类型的。
+- 访问标志(access_flags)：访问标志采用掩码的方式进行表示，每一位表示一个访问属性，包括ACC_PUBLIC,ACC_FINAL,ACC_SUPER,ACC_INTERFACE,ACC_ABSTRACT,ACC_SYNTHETIC,ACC_ANNOTATION,ACC_ENUM,ACC_MODULE
+- 字段集合(fields[])：字段表中的每个元素都是field_info类型的，该元素完整地描述了类或接口的一个字段。
+- 方法集合(methods[])：如同字段表，它的每个元素都是method_info类型的，该元素完整地描述了类或接口的一个方法。
+- 属性集合(attributes[])：属性表内的元素是attribute_info类型的，它描述了类或接口的一些属性，比如内部类列表，源文件名称等信息
 
 
 # 2 HotSpot虚拟机
