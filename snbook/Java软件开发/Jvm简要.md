@@ -48,7 +48,6 @@ Jvm运行时，将它拥有的内存分成若干部分，每一部分都有特�
 
 ### 1.3.1 Class文件结构
 
-#### 简述
 一个class文件的结构如下：
 
 ```java 
@@ -73,9 +72,25 @@ ClassFile{
 ```
 - 常量池(constant pool)：常量池主要存储各种编译时确定的信息，比如字符串常量，类、接口名称，字段名称，以及其他常量。每个常量池中的元素都是cp_info类型的。
 - 访问标志(access_flags)：访问标志采用掩码的方式进行表示，每一位表示一个访问属性，包括ACC_PUBLIC,ACC_FINAL,ACC_SUPER,ACC_INTERFACE,ACC_ABSTRACT,ACC_SYNTHETIC,ACC_ANNOTATION,ACC_ENUM,ACC_MODULE
-- 字段集合(fields[])：字段表中的每个元素都是field_info类型的，该元素完整地描述了类或接口的一个字段。
-- 方法集合(methods[])：如同字段表，它的每个元素都是method_info类型的，该元素完整地描述了类或接口的一个方法。
-- 属性集合(attributes[])：属性表内的元素是attribute_info类型的，它描述了类或接口的一些属性，比如内部类列表，源文件名称等信息
+- 字段表(fields[])：字段表中的每个表项都是field_info类型的，该表项完整地描述了类或接口的一个字段。
+- 方法表(methods[])：如同字段表，它的每个表项都是method_info类型的，该元素完整地描述了类或接口的一个方法。
+- 属性集合(attributes[])：属性表内的表项是attribute_info类型的，它描述了类或接口的一些属性，比如内部类列表，源文件名称等信息
+
+> 字段表项(field_info)与方法表项(method_info)中都有相应的属性集合存储字段或方法的一些属性，例如如下两个常见属性：
+
+
+ - ConstantValue：该属性属于field_info，当字段被`static`修饰时，该属性才起作用，用来存储该字段的值，在类或接口加载过程中被初始化；否则该属性被忽略。
+ - Code：该属性属于method_info，它存储了方法的字节码指令。
+
+### 1.3.2 Jvm的运行时常量池
+关于运行时常量池，在[1.1](##1.1)中已经介绍了Jvm的运行时数据区，常量池被分配在方法区中。
+
+同时Jvm的运行时常量池对应的是Class文件中的常量池，在Class文件被加载进Jvm时，依据Class文件的常量池在Jvm中创建相应的常量池。
+
+### 1.3.3 Jvm启动
+Jvm通过使用引导类加载器或自定义类加载器创建一个最初的类或接口来启动，然后进行链接，初始化等工作，接着调用`public static void main(String[])`方法。
+
+### 1.3.4 创建与加载
 
 
 # 2 HotSpot虚拟机
