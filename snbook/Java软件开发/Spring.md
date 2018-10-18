@@ -61,12 +61,12 @@ AOP主要的目的是将一些散布在应用各处的、实现同一功能的�
 
 # 2 Spring核心
 
-# 2.1 Spring容器
+## 2.1 Spring容器
 Spring容器负责管理Bean的生命周期，它负责创建并存储对象、装配对象以及销毁对象。Spring实现容器的基本方式是采用工厂模式，其BeanFactory是最简单容器，提供基本的DI支持。除此之外，Spring还基于BeanFactory提供了功能更强大的应用上下文(ApplicationContext)容器来支持复杂业务。
 
 > Context(上下文)可以理解为环境变量。应用中获取到一个Context，即可获得该Context内存储的相关信息，当这个Context被多个类、模块、线程读取时，即实现了信息共享。
 
-# 2.1.1 应用上下文(ApplicationContext)
+### 2.1.1 应用上下文(ApplicationContext)
 
 Spring内置了许多应用上下文，可以通过加载配置文件来创建Bean。配置文件类型分为JavaConfig和XML，根据加载不同类型配置文件，应用上下文分为如下几种：
 - 加载JavaConfig的应用上下文
@@ -77,11 +77,11 @@ Spring内置了许多应用上下文，可以通过加载配置文件来创建Be
     - FileSystemXmlApplicationContext
     - XmlWebApplicationContext
 
-# 2.1.2 Bean生命周期
+### 2.1.2 Bean生命周期
 
 
-# 2.2 Bean装配
+## 2.2 Bean装配
 
-# 2.3 AOP配置
+## 2.3 AOP配置
 
 # 3 Sping Web
