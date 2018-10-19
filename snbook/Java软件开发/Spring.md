@@ -79,8 +79,55 @@ Spring内置了许多应用上下文，可以通过加载配置文件来创建Be
 
 ### 2.1.2 Bean生命周期
 
+在容器(应用上下文)中，Bean被创建、配置，然后准备就绪，并驻留在容器中供应用使用。容器关闭时，Bean将被销毁。Bean生命周期大致分为以下几个阶段：
+- 实例化：创建一个Bean对象
+- 填充属性：注入所需依赖
+- 调用所实现接口的方法进行配置一些特殊属性
+- Bean准备就绪，驻留在容器中
+- 容器关闭：销毁Bean
 
 ## 2.2 Bean装配
+Bean装配(wiring，接线)是指处理Bean之间的协作
+在应用中，通过特殊的规范来声明Bean、配置Bean的注入从而帮助Spring将Bean装配到容器中。
+
+Bean装配通常有三种途径：
+- 通过XML配置
+- 通过JavaConfig配置
+- 自动扫描与装配
+
+
+### 2.2.1 通过XML配置Bean
+Spring通过一个`<beans>`元素为根的配置规范来配置Bean，其Bean声明通过`<bean>`标签来实现，构造器注入通过`<constructor-arg>`标签实现，Set注入(属性注入)通过`<property>`标签实现。
+示例如下：
+```xml
+<bean id="" class="">  
+     <constructor-arg value="" index="0"> </constructor-arg> 
+     <property name="" value=""></property>
+</bean>
+```
+> 通过加载XML配置的应用上下文加载该XML配置，上下文容器即可创建该Bean，并进行相关依赖的注入。
+
+
+### 2.2.2 通过JavaConfig配置Bean
+与XML装配不同，JavaConfig通过Java代码来装配Bean，首先需要使用`@Configuration`注解创建一个JavaConfig类，然后在JavaConfig类中，采用`@Bean`修饰的方法进行Bean的声明，方法内可以直接使用new来返回一个Bean实例(直接完成构造方法注入)，也可以直接调用SET方法进行属性注入，示例如下：
+```java
+@Configuration
+public class BeanConfig{
+    @Bean
+    public BeanType BeanA(BeanB b){
+        BeanA a = new BeanA(b);
+        a.setProperty(b);
+        return a;
+    }
+}
+```
+
+> 加载JavaConfig的上下文加载该JavaConfig类时，会调用BeanA方法，然后自动注入一个容器已有的BeanB实例，然后在BeanA方法内使用new或set进行依赖注入，最后返回一个BeanA实例。
+
+### 2.2.3 自动扫描与装配
+Bean自动装配通过自动扫描与自动注入实现，通过在业务代码的类上使用`@Component`修饰来标注该类应当生成一个Bean实例，同时在构造方法以及set方法上使用`@AutoWired`修饰来标注该方法应该进行依赖注入。
+
+自动扫描需要显示在XML或JavaConfig中开启，
 
 ## 2.3 AOP配置
 
