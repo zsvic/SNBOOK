@@ -29,7 +29,7 @@ Interface Servlet{
   
 ## 1.4 Servlet容器
 
-Servlet容器的作用就是管理Servlet的生命周期，它负责接收Web客户端的一个请求，然后根据请求调用相应Servlet实例的service方法。
+Servlet容器的作用就是管理Servlet的生命周期，并且使用Servlet对外响应请求。
 
 当Servlet实例不存在时，需要加载该Servlet类，然后创建实例并进行初始化；然后根据请求信息，创建一对Request和Response对象作为service方法的参数，最后将Response作为返回结果。
 
@@ -67,6 +67,8 @@ Tomcat使用一个Session管理器组件来管理Session对象，一个Session�
 
 
 # 2 JSP规范
+一个JSP页面是一个文本文档，它描述了如何根据一个请求对象来创建一个响应对象。JSP文档通常被编译成一个Servlet，然后被Servlet容器加载并提供服务。
+
 
 # 3 SpringMVC框架
 
