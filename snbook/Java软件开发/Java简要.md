@@ -22,15 +22,28 @@ int a = 1;
 数组是一个特殊的内置类型，当创建一个数组对象时，返回一个引用。数组对象的类型为 [+type，例如：
 ```java
 //一维数组，a的类型为：[int
-int[] a = new int[n];
+int[] a = {1,2};
+int[] a = new int[n]; //n >=0, 允许长度为0的数组
+int[] a = new int[] {1,2};
+int a;
+a = new int[] {1,2,3};
 //二维数组，b的类型为：[[int
 int[][] b = new int[n][m];
 ```
 
+Arrays类内置了一些有用的静态方法
+
+- Arrays.toString()：将数组内容转化成一个字符串
+- Arrays.copyOf(arr, length)：将数组arr拷贝到新的数组中，length为新数组的大小，当length大于arr.length时，新数组的多余位默认为0，当length小于arr.length时，只拷贝前面的数据。
+- Arrays.sort(arr)：使用快速排序对数组进行排序
+- Arrays.binarySearch(arr, t)：在arr中使用二分查找t，并返回目标值的索引
+- Arrays.fill(arr, t)：将arr填充t值
+- Arrays.equals(arr1, arr2)：比较arr1和arr2
+
 ### 1.1.3 字符串
 Java提供的String类，内部是由一个final的char数组来存储字符串的。
 
-#### 字符串常量与String堆内对象
+#### I. 字符串常量与String堆内对象
 字符串常量和new出来的String对象虽然都是String类的实例，并且是不可变的，但是他们还是有很大区别的，字符串常量在编译时就放入常量池，String对象在程序运行时才从堆中分配。
 ```java
 String a = "abc";
@@ -45,14 +58,57 @@ String d = "a" + new String("bc");
 - c在编译的时候进行优化，自动合并成 "abc"，与a为同一个对象
 - d在运行时，实际是隐含使用StringBuider进行字符串连接，返回一个String对象（在堆中）
 
-#### StringBuilder与StringBuffer
+#### II. StringBuilder与StringBuffer
 String对象都是不可变的，这是为了减少String运算产生大量的中间变量，在字符串连接等操作时会有效率问题，因此Java提供了StringBuilder来增强字符串的操作。
 
 StringBuilder内部使用一个char数组来存储字符串，并且长度可以动态增长，可以使用append方法连接字符串，使用toString方法返回一个String对象。
 
 StringBuffer和StringBuilder的功能一样，但是它是线程安全的，效率比StringBuilder要低。
 
-#### 正则表达式
+#### III. 字符编码与码点
+Unicode编码是最通用的一种编码方式，它将世界上大多数字符都分配一个唯一的编码进行表示，字符的编码也就是该字符的码点。
+
+由于字符数量太多，有些字符的码点的值非常大，怎么合适地存储这些码点是一个需要探讨的问题。
+
+A. UTF-32
+
+采用4个字节作为一个代码单元，每个代码单元可以存储一个字符，这样是最简单的方式，但是码点非常小的字符使用4字节来存储是非常浪费空间的。
+
+B. UTF-16
+
+采用2个字节作为一个代码单元，当码点值过大，无法使用2字节存储的话，就需要使用增补代码单元来表示，即使用2个代码单元来存储码点。
+
+C. UTF-8
+
+采用1个字节作为一个代码单元，当1个字节存储不下码点时，可以根据字符码点的大小来使用多个（2-4个）代码单元来存储。
+
+以上三种方式各有长短，UTF-32操作简单，但费空间；UTF-8空间利用率高，但操作复杂，需要额外的编码方式来区分该码点是占几个代码单元。Java里使用的是较为折中的UTF-16的方式编码。
+
+D. Java中的码点操作
+
+(1) 一个字符串可以转换成一个码点数组，也可以反向转换
+```java
+int[] codePoints = str.codePoints().toArray();
+
+String str = new String(codePoints, 0, codePoints.length)
+```
+
+(2) 获取字符串中第i (0....n) 个字符的码点
+```java
+//首先计算第i个字符的代码单元的索引
+int index = str.offsetByCondePoints(0, i);
+//根据索引找到码点
+int codePoints = str.codePointsAt(index);
+```
+
+（3）码点转换成字符数组
+```java
+//codePoint转换成字符后，可能是基本字符，只需要一个char代码单元就可以存储，但是如果是增强字符，需要两个char代码单元，因此需要使用字符数组来存储码点转换成的字符。
+char[] c = Character.tochars(codePoint);
+```
+
+#### IV. 正则表达式
+
 
 pass
 
